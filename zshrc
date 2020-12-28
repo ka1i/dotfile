@@ -18,21 +18,37 @@ precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 RPROMPT='${vcs_info_msg_0_}'
 
-host_var="%{%F{255}%}%n%{%f%}@%{%F{039}%}%m%{%f%} "
-workdir_var="%{%F{008}%}%1~%{%f%} "
-permssion_var="%{%F{092}%}%#%{%f%} "
-tag_var="%{%F{141}%}<<<%{%f%} "
-PS1="${host_var}${workdir_var}${permssion_var}${tag_var}"
-PS2=">>>> "
 setopt no_nomatch
+
+PS1="%{%F{255}%}%n%{%f%}@%{%F{039}%}%m%{%f%} %{%F{008}%}exec: %i/%h current: %j%{%f%} %{%F{093}%}status: %(?.%{%F{135}%}[ ok ]%{%f%}.%{%F{196}%}[oops]%{%f%})%{%f%}
+%{%F{008}%}%y %1~%{%f%} %{%F{092}%}%#%{%f%}⚑ %{%F{141}%}<<<%{%f%} "
+
+export HISTSIZE=20000000
+export SAVEHIST=10000000
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt HIST_BEEP 
 
 # plugins
 autoload -Uz compinit && compinit
 
+source "/Users/mardan/config/zsh.config/git/git.plugin.zsh"
+source "/Users/mardan/config/zsh.config/osx/osx.plugin.zsh"
 source "/Users/mardan/config/zsh.config/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "/Users/mardan/config/zsh.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "/Users/mardan/config/zsh.config/ohmyzsh_plugins/plugins/git/git.plugin.zsh"
-source "/Users/mardan/config/zsh.config/ohmyzsh_plugins/plugins/osx/osx.plugin.zsh"
+
+# brew
+export PATH="/usr/local/sbin:$PATH"
 
 # Golang
 export GO111MODULE=on
@@ -54,10 +70,10 @@ export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 export PATH=/Users/mardan/Tools/flutter/bin:${PATH}
 
 # Nodejs
-export PATH=/Users/mardan/Tools/node-v14.15.1-darwin-x64/bin:${PATH}
+export PATH=/Users/mardan/Tools/node-v14.15.3-darwin-x64/bin:${PATH}
 
-# brew
-export PATH="/usr/local/sbin:$PATH"
+# Maven
+export PATH=/Users/mardan/Tools/Java/apache-maven-3.6.3/bin:${PATH}
 
 # 3rd
 export PATH=/Users/mardan/Tools/3rd/bin:${PATH}
@@ -65,7 +81,6 @@ export PATH=/Users/mardan/workspace/www.mardan.wiki/wispeeer/bin:${PATH}
 
 alias subl='open -a "Sublime Text"'
 alias neofetch='neofetch  --kernel_shorthand off --shell_path on  --refresh_rate on --disk_show "/" --disk_subtitle name --memory_percent on'
-#alias screenfetch='neofetch --iterm2 /Users/mardan/config/neo_img.jpg'
 alias tree='tree -N'
 alias git='LANG=en_US git'
 

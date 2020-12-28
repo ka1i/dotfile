@@ -1,5 +1,5 @@
 # my dotfiles
 
-###zshrc
-###avatar image
-###misc
+### zshrc
+### avatar image
+### misc
