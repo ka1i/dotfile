@@ -82,7 +82,13 @@ export PATH=/Users/mardan/workspace/www.mardan.wiki/wispeeer/bin:${PATH}
 alias subl='open -a "Sublime Text"'
 alias neofetch='neofetch  --kernel_shorthand off --shell_path on  --refresh_rate on --disk_show "/" --disk_subtitle name --memory_percent on'
 alias tree='tree -N'
+alias open_command='open'
 alias git='LANG=en_US git'
+alias cls='clear'
+alias ct='ccat'
+alias smp='multipass start github;multipass info github;multipass shell github;'
+alias kmp='multipass stop github;'
+alias doa="echo -n 'Multipass [github]IPv4: ';multipass info github |grep IPv4 |awk '{print \$2}'"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -98,4 +104,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-

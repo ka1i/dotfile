@@ -1,0 +1,77 @@
+conky.config = {
+  background = false,
+  update_interval = 1.0,
+  double_buffer = true,
+  no_buffers = true,
+  text_buffer_size = 1024,
+
+  maximum_width = 600,
+
+  own_window = true,
+  own_window_type = 'desktop',
+  own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+  own_window_title = '',
+  own_window_argb_visual = true,
+  own_window_argb_value = 0,
+  own_window_transparent = true,
+
+  gap_x = 5,
+  gap_y = 20,
+  
+  draw_shades = false,
+  draw_outline = false,
+  draw_borders = false,
+  draw_graph_borders = false,
+  border_width = 1,
+  border_inner_margin = 1,
+  border_outer_margin = 0,
+
+  alignment = 'top_right',
+
+  use_xft = true,
+  xftalpha = .1,
+  font = 'saxMono:size=8',
+  uppercase = false,
+  use_spacer = left,
+  stippled_borders = 5,
+
+  override_utf8_locale = true,
+
+  default_color = 'a5adff',
+  default_shade_color = '333333',
+  default_outline_color = 'black',
+
+  -- set color collection
+  color0 = 'ffffff',
+  color1 = '03ff00',
+  color2 = '525252',
+  color3 = '494a5b',
+  color4 = '7AA6CC',
+  color5 = '00ffcf',
+  color6 = 'D6A29C',
+  color7 = 'ff0000',
+  color8 = '23ada0',
+  color9 = 'af2445',
+};
+
+
+conky.text = [[
+
+${texeci 600 /home/mardan/Application/miniconda3/bin/python ./script/conkySpeedtest.py > $HOME/.conky/Sci-Fi/temp/.speeds 2>&1}${execpi 60 cat $HOME/.conky/Sci-Fi/temp/.speeds}
+${color 494a5b}${execi 3600 iwconfig}${color}
+${goto 515}${color af2445}DWN SPD
+${goto 515}${if_existing /proc/net/route wlp3s0}${downspeedf wlp3s0}${else}${downspeedf enp2s0}${endif}KiB${color}
+${if_existing /proc/net/route wlp3s0}${voffset -30}${downspeedgraph wlp3s0 30,500 af2445 14151f scale 2048 -l}${else}${voffset -30}${downspeedgraph enp2s0 30,500 af2445 14151f scale 2048 -l}${endif}
+
+${voffset -5}${goto 515}${color 494a5b}UPL SPD
+${goto 515}${if_existing /proc/net/route wlp3s0}${upspeedf wlp3s0}${else}${upspeedf enp2s0}${endif}KiB${color}
+${if_existing /proc/net/route wlp3s0}${voffset -35}${upspeedgraph wlp3s0 30,500 14151f 494a5b scale 200 -l}${else}${voffset -35}${upspeedgraph enp2s0 30,500 14151f 494a5b scale 200 -l}${endif}
+
+                                                  
+                          ${offset 130} ─┤  ${color a5adff}CONNECTIONS${color}   ├─                                                        
+╭─                                                                                                    ${alignr}─╮
+${color3}State${color}          ${offset 100}             Local Address:Port            ${offset 120}         ${color3}Peer Address:Port${color}
+╰──         ╶${offset 100}┼╴                        ╶${offset 150}┼╴                        ${alignr} ──╯
+${execpi 5 ss -t -a | grep -e "ESTAB" | tail -n 10 | awk '{print $1, $4, $5}' | column -t | sed -e 's/\(\([^ ]* *\)\{2\}\)\([^ ]*\)/\1${alignr}${color3}\3${color}/' -e 's/\(\([^ ]* *\)\{0\}\)\([^ ]*\)/\1${color3}${goto 25}\3${color}${goto 160}/' -e 's/^/   /' -e '$s/^.../--->/' -e '$s/$/ </'}
+${hr 1}
+]];

@@ -1,0 +1,67 @@
+conky.config = {
+  background = false,
+  update_interval = 1.0,
+  double_buffer = true,
+  no_buffers = true,
+  text_buffer_size = 1024,
+
+  maximum_width = 1320,
+
+  own_window = true,
+  own_window_type = 'desktop',
+  own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+  own_window_title = '',
+  own_window_argb_visual = true,
+  own_window_argb_value = 0,
+  own_window_transparent = true,
+
+  gap_x = 0,
+  gap_y = 10,
+  
+  draw_shades = false,
+  draw_outline = false,
+  draw_borders = false,
+  draw_graph_borders = false,
+  border_width = 1,
+  border_inner_margin = 1,
+  border_outer_margin = 0,
+
+  alignment = 'bottom_left',
+
+  use_xft = true,
+  xftalpha = .1,
+  font = 'saxMono:size=9',
+  uppercase = false,
+  use_spacer = left,
+  stippled_borders = 5,
+
+  override_utf8_locale = true,
+
+  default_color = FFFFFF,
+  default_outline_color = black,
+
+  -- set color collection
+  color0 = 'ffffff',
+  color1 = '03ff00',
+  color2 = '525252',
+  color3 = '494a5b',
+  color4 = '7AA6CC',
+  color5 = '00ffcf',
+  color6 = 'D6A29C',
+  color7 = 'ff0000',
+  color8 = '23ada0',
+  color9 = 'af2445',
+};
+
+ 
+conky.text = [[
+
+  ╭╴               ╶╮
+      ${color a5adff}SYS LOGS${color0 }   
+  ╰╴               ╶╯
+${font YaHei Consolas Hybrid:size=9}${execpi 60 tail -n 10 /var/log/messages | cut -c1-1000 | awk '{$1=$2=$4=""; print $0}' | sed -e 's/kernel/${color5}kernel${color0}/' -e 's/root/${color8}root${color0}/'}
+
+
+  UPTIME: ${uptime}
+
+]];

@@ -1,0 +1,86 @@
+#Fonctionnement de conky 
+  total_run_times 0		#temps en secondes ; 0 = toujours actif
+  background no		#Pour que conky tourne en arrière plan ; no = pour les tests
+
+#Réglages système
+  cpu_avg_samples 1		#Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+  net_avg_samples 2		#Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+
+#Mémoire
+  double_buffer yes		#Éviter le clignotement
+  no_buffers yes		#Soustraire les mémoires tampons...
+  text_buffer_size 1024		#...de la mémoire utilisée
+
+#Affichage
+  out_to_console no		#Affiche le texte sur la sortie standard
+  update_interval 1.0		#Taux de rafraîchissement de la fenêtre (s)
+
+#Fenêtre conky
+  alignment top_left		#Alignement
+ #---
+minimum_size 300 200
+maximum_width 300
+ #---
+  gap_x 1600			#Écart avec le bord gauche / droit
+  gap_y 830			#Écart avec le bord haut / bas
+
+#---
+  draw_shades no		#Afficher les ombres
+  draw_outline no		#Afficher les contours de fenêtre
+  draw_borders no		#Afficher des contours autour des blocs de texte
+  draw_graph_borders yes
+  border_width 1		#Largeur du contour
+  border_inner_margin 1		#Largeur des marges
+
+ #---
+  own_window yes		#Utiliser sa propre fenêtre
+  own_window_type conky 	#Type de fenêtre ; normal / override / desktop
+  #own_window_transparent yes	#Pseudo transparence
+  own_window_argb_visual yes
+  own_window_argb_value 0
+  own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+#Mise en forme
+  use_xft yes			#Utiliser Xft (polices lissées etc)
+  xftalpha .1			#Utiliser Xft
+  override_utf8_locale yes 	#Force l'UTF8
+  uppercase no			#Tout le texte en majuscule
+  use_spacer yes			#Ajoute des espaces après certains objets (qu'avec des polices fixes)
+
+ #---
+  xftfont saxMono:size=9 	#Police par défaut
+ #---
+  stippled_borders 5		#Taille des pointillés
+
+#Couleurs
+  default_color FFFFFF 		#Couleur par défaut
+  default_shade_color 333333	#Couleur des ombres
+  default_outline_color black	#Couleur des contours
+
+ #---
+  color0 ffffff
+  color1 a5adff
+#  color1 525252 		#Gris
+  color2 494a5b 		#Rouge
+  color3 7AA6CC 		#Bleu
+  color4 00ffcf
+  color5 D6A29C	#pink
+  color7 ff0000
+  color8 525252 		#Gris
+  color9 ffffff
+ 
+TEXT
+${color5}${font Microsoft YaHei:pixelsize=21}Informations${font}
+${color2}__________________________________________
+${color2}${font OpenLogos:size=22}u${font} ${voffset -3}${offset -2}${execi 2600 cat /etc/issue.net}
+${offset 35}${color1}whoami : ${color2}${exec whoami}
+${offset 35}${color1}Kernal : ${color2}$kernel$machine
+${offset 35}${color1}Linux  : ${color2}$sysname-$nodename
+${color2}${font StyleBats:size=16}e${font} Hard Drive
+${color1}/${offset 59}Used ${color3}${fs_used_perc /}%${offset 29}${color1}Free ${color2}${fs_free /}
+${color5}${fs_bar 9,245 /}
+${color1}/boot${offset 39}Used ${color3}${fs_used_perc /boot}%${offset 29}${color1}Free ${color2}${fs_free /boot}
+${color5}${fs_bar 9,245 /boot}
+${color1}/home${offset 29}Used ${color3}${fs_used_perc /home}%${offset 29}${color1}Free ${color2}${fs_free /home}
+${color5}${fs_bar 9,245 /home}
+

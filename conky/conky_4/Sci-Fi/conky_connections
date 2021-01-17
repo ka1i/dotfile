@@ -1,0 +1,64 @@
+conky.config = {
+  background = false,
+  update_interval = 1.0,
+  double_buffer = true,
+  no_buffers = true,
+  text_buffer_size = 1024,
+
+  maximum_width = 600,
+
+  own_window = true,
+  own_window_type = 'desktop',
+  own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+  own_window_title = '',
+  own_window_argb_visual = true,
+  own_window_argb_value = 0,
+  own_window_transparent = true,
+
+  gap_x = 15,
+  gap_y = 200,
+  
+  draw_shades = false,
+  draw_outline = false,
+  draw_borders = false,
+  draw_graph_borders = false,
+  border_width = 1,
+  border_inner_margin = 1,
+  border_outer_margin = 0,
+
+  alignment = 'top_right',
+
+  use_xft = true,
+  xftalpha = .1,
+  font = 'saxMono:size=9',
+  uppercase = false,
+  use_spacer = left,
+  stippled_borders = 5,
+
+  override_utf8_locale = true,
+
+  default_color = '494b5a',
+  default_shade_color = '333333',
+  default_outline_color = 'black',
+
+  -- set color collection
+  color0 = 'ffffff',
+  color1 = '03ff00',
+  color2 = '525252',
+  color3 = '494a5b',
+  color4 = '7AA6CC',
+  color5 = '00ffcf',
+  color6 = 'D6A29C',
+  color7 = 'ff0000',
+  color8 = '23ada0',
+  color9 = 'af2445',
+};
+conky.text = [[
+                                                  
+                           ─┤  ${color a5adff}CONNECTIONS${color}   ├─                                                        
+╭─                                                                                                    ─╮
+${color3}State${color}                       Local Address:Port                     ${color3}Peer Address:Port${color}
+╰──         ╶┼╴                        ╶┼╴                                                     ──╯
+${execpi 5 ss -t -a | grep -e "ESTAB" | tail -n 10 | awk '{print $1, $4, $5}' | column -t | sed -e 's/\(\([^ ]* *\)\{2\}\)\([^ ]*\)/\1${offset 50}${color3}\3${color}/' -e 's/\(\([^ ]* *\)\{0\}\)\([^ ]*\)/\1${color3}\3${color}${offset 50}/' -e 's/^/    /' -e '$s/^.../**/' -e '$s/$/    **/'}
+${image /home/mardan/.conky/Sci-Fi/connections.png -p 5,0 -n}
+]];

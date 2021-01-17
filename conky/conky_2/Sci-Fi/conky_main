@@ -1,0 +1,145 @@
+#Réglages système
+  cpu_avg_samples 1		#Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+  net_avg_samples 2		#Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+
+#Mémoire
+  double_buffer yes		#Éviter le clignotement
+  no_buffers yes		#Soustraire les mémoires tampons...
+  text_buffer_size 1024		#...de la mémoire utilisée
+
+#Affichage
+  out_to_console no		#Affiche le texte sur la sortie standard
+  update_interval 1.0		#Taux de rafraîchissement de la fenêtre (s)
+
+#Fenêtre conky
+  alignment top_left		#Alignement
+ #---
+minimum_size 1024 400
+maximum_width 1024
+ #---
+  gap_x 0			#Écart avec le bord gauche / droit
+  gap_y 40			#Écart avec le bord haut / bas
+
+#---
+  draw_shades no		#Afficher les ombres
+  draw_outline no		#Afficher les contours de fenêtre
+  draw_borders no		#Afficher des contours autour des blocs de texte
+  draw_graph_borders no
+  border_width 1		#Largeur du contour
+  border_inner_margin 1		#Largeur des marges
+
+ #---
+  own_window yes		#Utiliser sa propre fenêtre
+  own_window_type desktop	#Type de fenêtre ; normal / override / desktop
+  #own_window_transparent yes	#Pseudo transparence
+  own_window_argb_visual yes
+  own_window_argb_value 0
+  own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+#Mise en forme
+  use_xft yes			#Utiliser Xft (polices lissées etc)
+  xftalpha .1			#Utiliser Xft
+  override_utf8_locale yes 	#Force l'UTF8
+  uppercase false			#Tout le texte en majuscule
+  use_spacer left			#Ajoute des espaces après certains objets (qu'avec des polices fixes)
+
+ #---
+  xftfont saxMono:size=9 	#Police par défaut
+ #---
+  stippled_borders 5		#Taille des pointillés
+
+#Couleurs
+  default_color FFFFFF 		#Couleur par défaut
+  default_shade_color 333333	#Couleur des ombres
+  default_outline_color black	#Couleur des contours
+
+ #---
+  color0 ffffff
+  color1 00ff00
+#  color1 525252 		#Gris
+  color2 494a5b 		#Rouge
+  color3 7AA6CC 		#Bleu
+  color4 00ffcf
+  color5 D6A29C	#pink
+  color7 ff0000
+  color8 525252 		#Gris
+  color9 ffffff
+ 
+# -- Lua Load -- #
+lua_load $HOME/.conky/Sci-Fi/script/clock_rings.lua
+lua_draw_hook_pre clock_rings
+ 
+TEXT
+
+${offset 35}Desk » $color1${desktop_name}$color
+${offset 35}${font Dejavu Sans:size=11} I/O : $color1${diskio}$color Uptime: ${uptime}
+${offset 275}${color #494a5b}${font Zegoe Light - U:pixelsize=54}${time %I:%M}${font Zegoe Light - U:pixelsize=26}:${time %S}${font}${font Amaze:pixelsize=26}${time %A -%B}${color FFA300}  ${time  %d, %Y}${font}
+$color9${voffset 20}${goto 114}${font Santana:size=24}${time %H:%M}${voffset -10}${font Santana:size=10}${font}${voffset 10}${goto 268}${hr 2}${font 迷你简硬笔行书:size=15}${voffset -22}${goto 650}${color #494a5b}给岁月以文明,给时光以生命。${voffset 35}${goto 600}${font ADELE:size=22}To the time to life, rather than to life in time.${voffset -66}${goto 278}${color0}${cpugraph cpu0 50,295}
+${font Amaze:size=14}${color #494a5b}
+${voffset -45}${goto 290}upload:${upspeedf enp2s0} KiB ${upspeedgraph enp2s0 20,130 14151f 494a5b scale 512KiB -l}
+${goto 280}download:${downspeedf enp2s0} KiB ${downspeedgraph enp2s0 20,120 af2445 14151f scale 512KiB -l}
+${voffset 65}
+${color5}${font 迷你简硬笔行书:size=21}${goto 30}Informations${font}
+${color2}__________________________________________
+${color2}${font OpenLogos:size=22}u${font} ${voffset -3}${offset -2}${execi 2600 cat /etc/issue.net}
+${offset 35}${color1}whoami : ${color2}${exec whoami}
+${offset 35}${color1}Kernal : ${color2}$kernel$machine
+${offset 35}${color1}Linux  : ${color2}$sysname-$nodename
+${color2}${font StyleBats:size=16}n${font} Process
+${offset 10}${top name 1}
+${offset 10}${top name 2}
+${offset 10}${top name 3}
+${offset 10}${top name 4}
+${offset 10}${top name 5}
+${offset 10}${top name 6}
+${offset 10}${top name 7}
+
+${offset 120}${voffset -120}${color1}${top pid 1}
+${offset 120}${color1}${top pid 2}${color2}
+${offset 120}${color1}${top pid 3}${color2}
+${offset 120}${color1}${top pid 4}${color2}
+${offset 120}${color1}${top pid 5}${color2}
+${offset 120}${color1}${top pid 6}${color2}
+${offset 120}${color1}${top pid 7}${color2}
+
+${offset 200}${voffset -120}${color2}${top cpu 1}%
+${offset 200}${color2}${top cpu 2}%
+${offset 200}${color2}${top cpu 3}%
+${offset 200}${color2}${top cpu 4}%
+${offset 200}${color2}${top cpu 5}%
+${offset 200}${color2}${top cpu 6}%
+${offset 200}${color2}${top cpu 7}%
+
+${offset 360}${voffset -120}${top_mem name 1}
+${offset 360}${top_mem name 2}
+${offset 360}${top_mem name 3}
+${offset 360}${top_mem name 4}
+${offset 360}${top_mem name 5}
+${offset 360}${top_mem name 6}
+${offset 360}${top_mem name 7}
+
+${offset 490}${voffset -120}${top_mem pid 1}
+${offset 490}${top_mem pid 2}
+${offset 490}${top_mem pid 3}
+${offset 490}${top_mem pid 4}
+${offset 490}${top_mem pid 5}
+${offset 490}${top_mem pid 6}
+${offset 490}${top_mem pid 7}
+
+${offset 560}${voffset -120}${top_mem mem 1}%
+${offset 560}${top_mem mem 2}%
+${offset 560}${top_mem mem 3}%
+${offset 560}${top_mem mem 4}%
+${offset 560}${top_mem mem 5}%
+${offset 560}${top_mem mem 6}%
+${offset 560}${top_mem mem 7}%
+
+${voffset 170}
+
+  ╭╴               ╶╮
+      ${color a5adff}SYS LOGS${color2 }   
+  ╰╴               ╶╯
+${execpi 60 tail -n 7 /var/log/messages | cut -c1-90 | awk '{$1=$2=$4=""; print $0}' | sed -e 's/kernel/${color af2445}kernel${color2}/' -e 's/root/${color 23ada0}root${color2}/'}
+
+
+  UPTIME: ${uptime}

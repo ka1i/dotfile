@@ -1,0 +1,119 @@
+#Fonctionnement de conky 
+  total_run_times 0		#temps en secondes ; 0 = toujours actif
+  background yes		#Pour que conky tourne en arrière plan ; no = pour les tests
+
+#Réglages système
+  cpu_avg_samples 1		#Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+  net_avg_samples 2		#Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+
+#Mémoire
+  double_buffer yes		#Éviter le clignotement
+  no_buffers yes		#Soustraire les mémoires tampons...
+  text_buffer_size 1024		#...de la mémoire utilisée
+
+#Affichage
+  out_to_console no		#Affiche le texte sur la sortie standard
+  update_interval 1		#Taux de rafraîchissement de la fenêtre (s)
+
+#Fenêtre conky
+  alignment top_left		#Alignement
+ #---
+minimum_size 1024 400
+maximum_width 1024
+ #---
+  gap_x 0			#Écart avec le bord gauche / droit
+  gap_y 25			#Écart avec le bord haut / bas
+ #---
+  draw_shades no		#Afficher les ombres
+  draw_outline no		#Afficher les contours de fenêtre
+  draw_borders no		#Afficher des contours autour des blocs de texte
+  draw_graph_borders no
+  border_width 1		#Largeur du contour
+  border_inner_margin 1		#Largeur des marges
+ #---
+  own_window yes		#Utiliser sa propre fenêtre
+  own_window_type dock 	#Type de fenêtre ; normal / override / desktop
+  own_window_transparent yes	#Pseudo transparence
+  own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+#Mise en forme
+  use_xft yes			#Utiliser Xft (polices lissées etc)
+  xftalpha .1			#Utiliser Xft
+  override_utf8_locale yes 	#Force l'UTF8
+  uppercase no			#Tout le texte en majuscule
+  use_spacer yes			#Ajoute des espaces après certains objets (qu'avec des polices fixes)
+ #---
+  xftfont saxMono:size=9 	#Police par défaut
+ #---
+  stippled_borders 5		#Taille des pointillés
+
+#Couleurs
+  default_color FFFFFF 		#Couleur par défaut
+  default_shade_color 333333	#Couleur des ombres
+  default_outline_color black	#Couleur des contours
+
+ #---
+  color0 ffffff
+  color1 00ff00
+#  color1 525252 		#Gris
+  color2 BF0A0D 		#Rouge
+  color3 7AA6CC 		#Bleu
+  color4 00ffcf
+  color5 D6A29C	#pink
+  color7 ff0000
+  color8 525252 		#Gris
+  color9 ffffff
+ 
+# -- Lua Load -- #
+lua_load $HOME/.conky/Personal-Assistant/script/clock_rings.lua
+lua_draw_hook_pre clock_rings
+ 
+TEXT
+${offset 5}${font StyleBats:size=12}v${font} Mardan Personal-Assistant
+${offset 35}Desk » $color1${desktop_name}$color 
+${offset 35} UPT » $color1${uptime}$color
+${offset 35}${font Dejavu Sans:size=11} I/O : $color1${diskio}
+${offset 275}${font Zegoe Light - U:pixelsize=54}${time %I:%M}${font Zegoe Light - U:pixelsize=26}:${time %S}${font}${color #00ffcf}${font Amaze:pixelsize=26}${time %A -%B}${color FFA300}  ${time  %d, %Y}${font}
+$color9${voffset 20}${goto 114}${font Santana:size=24}${time %H:%M}${voffset -10}${font Santana:size=10}${font}${voffset -5}${goto 268}${hr 2}${font 迷你简硬笔行书:size=15}${voffset -22}${goto 650}${color1}给岁月以文明,给时光以生命。${voffset 30}${goto 600}${font ADELE:size=22}To the time to life, rather than to life in time.${voffset -61}${goto 278}${color0}${cpugraph cpu0 50,295}
+
+${offset 27}${font OpenLogos:size=24}${color FF0000}${voffset 60}U${color5}${font size=32}${offset 30}System${font}
+${offset 27}${color2}__________________________________________
+${offset 27}${color2}${font StyleBats:size=16}a${font} CPU
+${offset 27}${color1}Core  : ${color3}$acpitemp°C(T)${goto 170}${color1}${goto 240}${color3}${freq_g 1} GHz
+${offset 27}${color2}${font StyleBats:size=16}p${font} Memory
+${offset 27}${color1}Swap : ${color FFA300}$swapperc %${goto 220}${swap} / ${swapfree}
+${offset 27}${color1}RAM  : ${color3}$memperc %${goto 140}$memfree/$mem/$memmax
+${offset 27}${color2}${font StyleBats:size=16}q${font} Processes ${processes}
+${offset 27}${color1}Running : ${running_processes}
+${offset 27}Top CPU : ${color3}${top name 1}${goto 210}${color1}${top pid 1}${color2}${goto 240}${top cpu 1}%
+${offset 27}${color1}Top RAM : ${color3}${top_mem name 1}${goto 210}${color1}${top_mem pid 1}${color2}${goto 240}${top_mem mem 1}%
+
+${offset 450}${voffset -176}${color5}${font Microsoft YaHei:pixelsize=21}Informations${font}
+${offset 400}${color2}__________________________________________
+${offset 400}${color2}${font OpenLogos:size=22}u${font} ${voffset -3}${offset -2}${execi 2600 cat /etc/issue.net}
+${offset 400}${offset 35}${color1}whoami : ${color2}${exec whoami}
+${offset 400}${offset 35}${color1}Kernal : ${color2}$kernel$machine
+${offset 400}${offset 35}${color1}Linux  : ${color5}$sysname-$nodename
+${offset 400}${color2}${font StyleBats:size=16}e${font} Hard Drive
+${offset 400}${color1}/boot${offset 29}Used ${color3}${fs_used_perc /boot}%${offset 29}${color1}Free ${color2}${fs_free /boot}
+${offset 400}${color5}${fs_bar 9,245 /boot}
+${offset 400}${color1}/home${offset 29}Used ${color3}${fs_used_perc /home}%${offset 29}${color1}Free ${color2}${fs_free /home}
+${offset 400}${color5}${fs_bar 9,245 /home}
+
+${offset 855}${voffset -305}${color5}${font Zombified:size=32}${offset -50}Network${font}
+${offset 705}${color2}_______________________________________________
+${offset 700}${color2}${font StyleBats:size=16}5${font} Transfers
+${offset 710}${font Microsoft YaHei:pixelsize=12}${color1}${offset 35}  Up   : ${color3}${upspeed wlan0}${goto 850}${color1}Total : ${color2}${totalup wlan0}
+#${offset 705}${color1}${upspeedgraph wlan0 12,0 000000 BF0A0D}
+${offset 710}${color1}${offset 35}Down : ${color3}${downspeed wlan0}${goto 850}${color1}Total : ${color2}${totaldown wlan0}
+#${offset 725}${color1}${downspeedgraph wlan0 12,0 000000 BF0A0D}
+${offset 705}${color2}${font StyleBats:size=16}n${font} ${if_existing /proc/net/route wlan0}Connected ${wireless_link_qual_perc wlan0}%
+${offset 710}${color1}${offset 35}Type : ${color3}${gw_iface}
+${offset 710}${color1}${offset 35}Name : ${wireless_essid wlan0}${else}Disconnected
+${offset 710}${color1}${offset 35}Type : unknown
+${offset 710}${color1}${offset 35}Name : unknown${endif}
+${offset 705}${color2}${font StyleBats:size=16}y${font} Address IP${if_existing /proc/net/route wlan0}
+${offset 710}${color1}${offset 35}Pas. : ${gw_ip}
+${offset 710}${color1}${offset 35}Loc. : ${addr wlan0}${else}
+${offset 710}${color1}${offset 35}Pas. : xxx.xxx.xxx.xxx
+${offset 710}${color1}${offset 35}Loc. : xxx.xxx.xxx.xxx${endif}
+

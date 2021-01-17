@@ -1,0 +1,73 @@
+conky.config = {
+  background = false,
+  update_interval = 1.0,
+  double_buffer = true,
+  no_buffers = true,
+  text_buffer_size = 1024,
+
+  maximum_width = 700,
+
+  own_window = true,
+  own_window_type = 'desktop',
+  own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+  own_window_title = '',
+  own_window_argb_visual = true,
+  own_window_argb_value = 0,
+  own_window_transparent = true,
+
+  gap_x = 0,
+  gap_y = 0,
+  
+  draw_shades = false,
+  draw_outline = false,
+  draw_borders = false,
+  draw_graph_borders = false,
+  border_width = 1,
+  border_inner_margin = 1,
+  border_outer_margin = 0,
+
+  alignment = 'bottom_right',
+
+  use_xft = true,
+  xftalpha = .1,
+  font = 'saxMono:size=9',
+  uppercase = false,
+  use_spacer = left,
+  stippled_borders = 5,
+
+  override_utf8_locale = true,
+
+  default_color = '494b5a',
+  default_shade_color = '333333',
+  default_outline_color = 'black',
+
+  -- set color collection
+  color0 = 'ffffff',
+  color1 = '03ff00',
+  color2 = '525252',
+  color3 = '494a5b',
+  color4 = '7AA6CC',
+  color5 = '00ffcf',
+  color6 = 'D6A29C',
+  color7 = 'ff0000',
+  color8 = '23ada0',
+  color9 = 'af2445',
+};
+
+conky.text = [[
+  ${color F8F8FF}╭╴                        ╶╮
+      ${color a5adff}rss brief report${color F8F8FF}${font 迷你简硬笔行书:size=13}${voffset -12}${goto 165}给岁月以文明,给时光以生命。${voffset 15}${goto 140}${font ADELE:size=16}To the time to life, rather than to life in time.${voffset -5}${font}
+  ╰╴                        ╶╯
+${font YaHei Consolas Hybrid:size=13}${color6}https://www.mardan.wiki${color F8F8FF}
+${font YaHei Consolas Hybrid:size=9}${rss https://rsshub.app/hexo/next/mardan.wiki 15 item_titles 6 } 
+${voffset -118}${font Microsoft YaHei:size=8}${rss https://rsshub.app/oschina/news/industry 15 item_titles 12 100}
+${font YaHei Consolas Hybrid:size=13}${color6}Github repo${color F8F8FF}
+${font YaHei Consolas Hybrid:size=11}${color6}  ka1i ${offset 130}Cr7-joker${offset 115}LJIJCJ ${alignr}MichaelTan9999    ${color F8F8FF}
+${font YaHei Consolas Hybrid:size=9}${rss https://rsshub.app/github/repos/ka1i 15 item_titles 8 }
+
+${voffset -150}${rss https://rsshub.app/github/repos/Cr7-joker 15 item_titles 8 25}
+
+${voffset -150}${rss https://rsshub.app/github/repos/LJIJCJ 15 item_titles 8 50}
+
+${voffset -150}${rss https://rsshub.app/github/repos/MichaelTan9999 15 item_titles 8 75}
+]];

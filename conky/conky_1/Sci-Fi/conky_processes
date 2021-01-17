@@ -1,0 +1,110 @@
+#Fonctionnement de conky 
+  total_run_times 0		#temps en secondes ; 0 = toujours actif
+  background no		#Pour que conky tourne en arrière plan ; no = pour les tests
+
+#Réglages système
+  cpu_avg_samples 1		#Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+  net_avg_samples 2		#Nb d'échantillons pour calculer la moyenne d'utilisation CPU
+
+#Mémoire
+  double_buffer yes		#Éviter le clignotement
+  no_buffers yes		#Soustraire les mémoires tampons...
+  text_buffer_size 1024		#...de la mémoire utilisée
+
+
+#Affichage
+  out_to_console no		#Affiche le texte sur la sortie standard
+  update_interval 1.0		#Taux de rafraîchissement de la fenêtre (s)
+
+#---
+  draw_shades no		#Afficher les ombres
+  draw_outline no		#Afficher les contours de fenêtre
+  draw_borders no		#Afficher des contours autour des blocs de texte
+  draw_graph_borders yes
+  border_width 1		#Largeur du contour
+  border_inner_margin 1		#Largeur des marges
+ 
+#---
+  own_window yes		#Utiliser sa propre fenêtre
+  own_window_type conky 	#Type de fenêtre ; normal / override / desktop
+  #own_window_transparent yes	#Pseudo transparence
+  own_window_argb_visual yes
+  own_window_argb_value 0
+  own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+#Mise en forme
+  use_xft yes			#Utiliser Xft (polices lissées etc)
+  xftalpha .1			#Utiliser Xft
+  override_utf8_locale yes 	#Force l'UTF8
+  uppercase no			#Tout le texte en majuscule
+  use_spacer yes			#Ajoute des espaces après certains objets (qu'avec des polices fixes)
+
+ #---
+  xftfont saxMono:size=9 	#Police par défaut
+ #---
+  stippled_borders 5		#Taille des pointillés
+
+alignment top_left
+gap_x 670
+gap_y 845
+cpu_avg_samples 2
+net_avg_samples 2
+minimum_size 600 210
+maximum_width 600
+color0 494a5b
+default_color a5adff
+color1 494a5b
+TEXT
+${color1}${goto 170}RAM  : ${color3}$memperc %${goto 270}$memfree/$mem/$memmax
+${goto 130}${font Monospace:pixelsize=15}CPU${font}${goto 292}│${goto 430}${color0}${font Monospace:pixelsize=15}RAM${font}${color}
+                   
+╶┼╴                                                                 ╶┼╴                                                                 ╶┼╴
+${offset 10}${top name 1}
+${offset 10}${top name 2}
+${offset 10}${top name 3}
+${offset 10}${top name 4}
+${offset 10}${top name 5}
+${offset 10}${top name 6}
+${offset 10}${top name 7}
+
+${offset 120}${voffset -120}${color1}${top pid 1}
+${offset 120}${color1}${top pid 2}${color2}
+${offset 120}${color1}${top pid 3}${color2}
+${offset 120}${color1}${top pid 4}${color2}
+${offset 120}${color1}${top pid 5}${color2}
+${offset 120}${color1}${top pid 6}${color2}
+${offset 120}${color1}${top pid 7}${color2}
+
+${offset 200}${voffset -120}${color2}${top cpu 1}%
+${offset 200}${color2}${top cpu 2}%
+${offset 200}${color2}${top cpu 3}%
+${offset 200}${color2}${top cpu 4}%
+${offset 200}${color2}${top cpu 5}%
+${offset 200}${color2}${top cpu 6}%
+${offset 200}${color2}${top cpu 7}%
+
+${offset 310}${voffset -120}${top_mem name 1}
+${offset 310}${top_mem name 2}
+${offset 310}${top_mem name 3}
+${offset 310}${top_mem name 4}
+${offset 310}${top_mem name 5}
+${offset 310}${top_mem name 6}
+${offset 310}${top_mem name 7}
+
+${offset 440}${voffset -120}${top_mem pid 1}
+${offset 440}${top_mem pid 2}
+${offset 440}${top_mem pid 3}
+${offset 440}${top_mem pid 4}
+${offset 440}${top_mem pid 5}
+${offset 440}${top_mem pid 6}
+${offset 440}${top_mem pid 7}
+
+${offset 510}${voffset -120}${top_mem mem 1}%
+${offset 510}${top_mem mem 2}%
+${offset 510}${top_mem mem 3}%
+${offset 510}${top_mem mem 4}%
+${offset 510}${top_mem mem 5}%
+${offset 510}${top_mem mem 6}%
+${offset 510}${top_mem mem 7}%
+╶┼╴                                                                                                                                       ╶┼╴ 
+${image $HOME/.conky/Sci-Fi/processes.png -p 0,30 -n}
