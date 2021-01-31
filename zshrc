@@ -52,12 +52,13 @@ export PATH="/usr/local/sbin:$PATH"
 
 # Golang
 export GO111MODULE=on
-export GOROOT=/Users/mardan/Tools/Golang/go 
-export GOPATH=/Users/mardan/Tools/Golang/res 
+export GOROOT=/Users/mardan/Tools/Golang/go1.16 
+export GOPATH=/Users/mardan/Tools/Golang/res1.16 
 export PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
 
 # Qemu
 export PATH=/Users/mardan/Tools/qemu-5.1.0/bin:${PATH}
+
 # Qt5
 export PATH="/usr/local/opt/qt/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/qt/lib"
@@ -75,20 +76,27 @@ export PATH=/Users/mardan/Tools/node-v14.15.3-darwin-x64/bin:${PATH}
 # Maven
 export PATH=/Users/mardan/Tools/Java/apache-maven-3.6.3/bin:${PATH}
 
+# rpi pico & gcc-arm-none-eabi
+export PICO_SDK_PATH=/Users/mardan/Tools/pico/pico-sdk
+export PATH=/Users/mardan/Tools/pico/gcc-arm-none-eabi-9-2020-q2-update/bin:${PATH}
+
+
 # 3rd
 export PATH=/Users/mardan/Tools/3rd/bin:${PATH}
-export PATH=/Users/mardan/workspace/www.mardan.wiki/wispeeer/bin:${PATH}
+export PATH=/Users/mardan/Tools/depot_tools:${PATH}
 
 alias subl='open -a "Sublime Text"'
-alias neofetch='neofetch  --kernel_shorthand off --shell_path on  --refresh_rate on --disk_show "/" --disk_subtitle name --memory_percent on'
+alias code='open -a "Visual Studio Code"'
+alias neofetch='neofetch  --kernel_shorthand off --shell_path on --refresh_rate on --memory_percent on'
 alias tree='tree -N'
 alias open_command='open'
 alias git='LANG=en_US git'
 alias cls='clear'
 alias ct='ccat'
-alias smp='multipass start github;multipass info github;multipass shell github;'
-alias kmp='multipass stop github;'
-alias doa="echo -n 'Multipass [github]IPv4: ';multipass info github |grep IPv4 |awk '{print \$2}'"
+alias smp='multipass start wdxx;multipass info wdxx;multipass shell wdxx;'
+alias kmp='multipass stop wdxx;'
+alias doa="echo -n 'Multipass [github]IPv4: ';multipass info wdxx |grep IPv4 |awk '{print \$2}'"
+alias haxm_helper='/Users/mardan/Tools/3rd/bin/HAXM_checktool -v'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
